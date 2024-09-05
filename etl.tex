@@ -1,10 +1,20 @@
 \documentclass{article}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
 
-\title{ETL/ELT Pipelines: Komplexný sprievodca}
+\title{Sprievodca ETL a ELT Pipelineami v Pythone}
 \author{}
 \date{}
+
+\lstset{language=Python,
+        basicstyle=\ttfamily,
+        keywordstyle=\color{blue},
+        commentstyle=\color{gray},
+        stringstyle=\color{orange},
+        frame=single,
+        breaklines=true}
 
 \begin{document}
 
@@ -27,6 +37,27 @@ Tri hlavné fázy ETL sú:
     \item \textbf{Transform:} Transformácia dát, ako je filtrovanie, agregácia alebo konverzia formátov dát na splnenie obchodných požiadaviek.
     \item \textbf{Load:} Uloženie transformovaných dát do cieľového systému, zvyčajne do dátového skladu, dátového jazera alebo inej analytickej platformy.
 \end{itemize}
+
+\section{Príklad ETL pipeline v Pythone}
+
+Tu je jednoduchý príklad ETL pipeline v Pythone, ktorý ukazuje základnú extrakciu dát, transformáciu a načítanie do súboru:
+
+\begin{lstlisting}[caption={Základný ETL proces v Pythone}]
+import pandas as pd
+
+# Extrakcia dát z CSV súboru
+data = pd.read_csv('employees.csv')
+
+# Transformácia dát: zvýšenie mzdy o 10%
+data['salary'] = data['salary'] * 1.10
+
+# Načítanie transformovaných dát do nového CSV súboru
+data.to_csv('transformed_employees.csv', index=False)
+
+print("ETL pipeline dokončená.")
+\end{lstlisting}
+
+V tomto jednoduchom príklade extrahujeme dáta zo súboru `employees.csv`, vykonáme transformáciu tým, že zvýšime mzdy o 10\%, a výsledné dáta uložíme do nového súboru `transformed_employees.csv`.
 
 \section{Výhody ETL pipelines}
 
@@ -60,54 +91,9 @@ ELT pipelines sú výhodné v situáciách, kde sa spracúvajú veľké objemy d
     \item \textbf{Rýchlosť:} ELT môže byť rýchlejšie pre načítanie dát, keďže transformácie sú vykonávané až po ich načítaní.
 \end{itemize}
 
-\section{ETL vs. ELT: Ktorý prístup zvoliť?}
-
-Výber medzi ETL a ELT závisí od konkrétneho použitia a dostupnej infraštruktúry:
-
-\begin{itemize}
-    \item \textbf{ETL:} Najvhodnejšie pre prípady, kde dáta vyžadujú významné transformácie, validáciu alebo obohatenie pred analýzou. Je ideálne pre prácu s tradičnými systémami, on-premise databázami alebo keď je obmedzená výpočtová kapacita cieľového systému.
-    \item \textbf{ELT:} Preferované pri práci s modernými cloudovými dátovými platformami, ktoré dokážu spracovať veľké množstvo dát. ELT je vhodné, keď chcete rýchlo načítať surové dáta a transformácie vykonávať v cieľovom systéme.
-\end{itemize}
-
-\section{Nastavenie ETL pipeline}
-
-Príkladový pracovný postup pre nastavenie ETL pipeline:
-
-\begin{enumerate}
-    \item \textbf{Extrakcia dát:} Použite konektory alebo API na získanie dát z rôznych zdrojových systémov, ako sú databázy, súbory alebo tretie strany.
-    \item \textbf{Transformácia dát:} Spracujte dáta aplikovaním filtrov, agregácií alebo formátovania. Napríklad môžete zvýšiť všetky mzdy zamestnancov o 10 \%.
-    \item \textbf{Načítanie dát:} Uložte transformované dáta do cieľového systému, ako je dátový sklad alebo dátové jazero.
-\end{enumerate}
-
-\section{Nastavenie ELT pipeline}
-
-Na nastavenie ELT pipeline postupujte takto:
-
-\begin{enumerate}
-    \item \textbf{Extrakcia dát:} Rovnako ako pri ETL, extrahujte dáta z viacerých zdrojov.
-    \item \textbf{Načítanie dát:} Načítajte surové dáta do cieľového systému, ako je cloudový dátový sklad.
-    \item \textbf{Transformácia dát:} Využite výpočtovú kapacitu cieľového systému na vykonanie transformácií prostredníctvom SQL alebo iných dotazovacích jazykov.
-\end{enumerate}
-
-\section{Programatické transformácie pomocou dbt}
-
-Dátová komunita čoraz viac využíva nástroje ako \textbf{dbt (data build tool)} na programatické transformácie v rámci pipeline. dbt umožňuje používateľom písať transformácie v SQL a poskytuje funkcie testovania a dokumentácie.
-
-\begin{itemize}
-    \item \textbf{Transformácie založené na SQL:} Používatelia môžu definovať logiku transformácií v SQL skriptoch známych ako dbt modely.
-    \item \textbf{Testovanie a dokumentácia:} dbt umožňuje implementovať kontroly kvality dát a vytvárať dokumentáciu spoločne s transformáciami.
-\end{itemize}
-
-Viac informácií o dbt nájdete v \href{https://docs.getdbt.com/}{dokumentácii dbt}.
-
 \section{Záver}
 
 ETL a ELT pipelines hrajú zásadnú úlohu v moderných dátových pracovných tokoch tým, že zabezpečujú efektívnu integráciu, transformáciu a načítanie dát do cieľových systémov. Voľba medzi ETL a ELT závisí od faktorov, ako sú objem dát, zložitosť transformácií a dostupná infraštruktúra.
-
-\begin{itemize}
-    \item \textbf{ETL:} Ideálne pre scenáre, kde sú potrebné zložité transformácie pred načítaním dát.
-    \item \textbf{ELT:} Vhodné pre moderné cloudové prostredia, ktoré dokážu spracovať veľké dátové súbory a umožňujú transformácie po načítaní.
-\end{itemize}
 
 Použitím správneho prístupu môžu organizácie zabezpečiť efektívne spracovanie dát, čo podporí lepšie rozhodovanie a analýzu.
 
