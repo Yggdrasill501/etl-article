@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\title{ETL/ELT Pipelines: Komplexný sprievodca}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Úvod}
+
+Zabezpečenie bezproblémovej integrácie dát medzi rôznymi platformami je pre každú organizáciu kľúčové. Procesy transformácie dát sú nevyhnutné na spracovanie rôznorodých dátových súborov a moderné nástroje a techniky umožňujú efektívnejšiu správu týchto transformácií. ETL (Extract, Transform, Load) a ELT (Extract, Load, Transform) sú zásadné pre oblasť dátového inžinierstva, poskytujú rámce na presun, spracovanie a transformáciu dát.
+
+V tomto článku sa pozrieme na ETL a ELT pipelines, ich význam a ako nastaviť tieto procesy na zjednodušenie integrácie a správy dát.
+
+\section{Pochopenie ETL pipelines}
+
+ETL pipelines predstavujú tradičnú metódu pre integráciu dát, kde sa dáta najprv extrahujú z rôznych zdrojových systémov, potom sa transformujú do vhodného formátu a nakoniec sa načítajú do cieľového systému, ako je dátový sklad alebo dátové jazero. ETL je obzvlášť výhodné, keď dáta potrebujú byť vyčistené, obohatené alebo preštruktúrované pred ich uložením alebo analýzou.
+
+Tri hlavné fázy ETL sú:
+
+\begin{itemize}
+    \item \textbf{Extract:} Extrakcia dát zo zdrojových systémov, ktoré môžu zahŕňať databázy, API, súbory alebo iné zdroje dát.
+    \item \textbf{Transform:} Transformácia dát, ako je filtrovanie, agregácia alebo konverzia formátov dát na splnenie obchodných požiadaviek.
+    \item \textbf{Load:} Uloženie transformovaných dát do cieľového systému, zvyčajne do dátového skladu, dátového jazera alebo inej analytickej platformy.
+\end{itemize}
+
+\section{Výhody ETL pipelines}
+
+ETL pipelines sú obzvlášť účinné, keď dáta vyžadujú komplexné transformácie alebo predspracovanie pred uložením. Hlavné výhody ETL pipelines sú:
+
+\begin{itemize}
+    \item \textbf{Kvalita dát:} Transformácia môže zabezpečiť, že dáta sú čisté, štruktúrované a pripravené na analýzu.
+    \item \textbf{Flexibilita:} Umožňuje rôzne techniky transformácie, čím umožňuje prispôsobené obchodné logiky.
+    \item \textbf{Predspracovanie:} Dáta sú transformované pred tým, ako sa dostanú do cieľového systému, čo znižuje potrebu náročných operácií v cieľovom systéme.
+\end{itemize}
+
+\section{Pochopenie ELT pipelines}
+
+ELT (Extract, Load, Transform) je variácia, kde sa dáta najprv extrahujú a načítajú do cieľového systému, ako je dátový sklad, a potom sa transformujú pomocou výpočtovej kapacity cieľového systému. ELT získava na popularite vďaka rozmachu cloudových dátových skladov a platforiem veľkých dát, ktoré poskytujú škálovateľné výpočtové zdroje pre spracovanie veľkých dátových súborov.
+
+Fázy ELT sú:
+
+\begin{itemize}
+    \item \textbf{Extract:} Dáta sa získavajú z rôznych zdrojov.
+    \item \textbf{Load:} Surové dáta sa načítajú priamo do cieľového systému bez transformácie.
+    \item \textbf{Transform:} Po načítaní sa dáta transformujú v rámci cieľového systému, zvyčajne pomocou SQL alebo iných dotazovacích jazykov.
+\end{itemize}
+
+\section{Výhody ELT pipelines}
+
+ELT pipelines sú výhodné v situáciách, kde sa spracúvajú veľké objemy dát a cieľový systém má kapacitu na vykonanie transformácií vo veľkom rozsahu. Niektoré výhody zahŕňajú:
+
+\begin{itemize}
+    \item \textbf{Škálovateľnosť:} Moderné cloudové sklady umožňujú transformáciu veľkých dátových súborov pomocou distribuovaného výpočtového výkonu.
+    \item \textbf{Jednoduchosť:} Dáta sa načítajú tak, ako sú, čo znižuje zložitosť transformácií počas fázy extrakcie.
+    \item \textbf{Rýchlosť:} ELT môže byť rýchlejšie pre načítanie dát, keďže transformácie sú vykonávané až po ich načítaní.
+\end{itemize}
+
+\section{ETL vs. ELT: Ktorý prístup zvoliť?}
+
+Výber medzi ETL a ELT závisí od konkrétneho použitia a dostupnej infraštruktúry:
+
+\begin{itemize}
+    \item \textbf{ETL:} Najvhodnejšie pre prípady, kde dáta vyžadujú významné transformácie, validáciu alebo obohatenie pred analýzou. Je ideálne pre prácu s tradičnými systémami, on-premise databázami alebo keď je obmedzená výpočtová kapacita cieľového systému.
+    \item \textbf{ELT:} Preferované pri práci s modernými cloudovými dátovými platformami, ktoré dokážu spracovať veľké množstvo dát. ELT je vhodné, keď chcete rýchlo načítať surové dáta a transformácie vykonávať v cieľovom systéme.
+\end{itemize}
+
+\section{Nastavenie ETL pipeline}
+
+Príkladový pracovný postup pre nastavenie ETL pipeline:
+
+\begin{enumerate}
+    \item \textbf{Extrakcia dát:} Použite konektory alebo API na získanie dát z rôznych zdrojových systémov, ako sú databázy, súbory alebo tretie strany.
+    \item \textbf{Transformácia dát:} Spracujte dáta aplikovaním filtrov, agregácií alebo formátovania. Napríklad môžete zvýšiť všetky mzdy zamestnancov o 10 \%.
+    \item \textbf{Načítanie dát:} Uložte transformované dáta do cieľového systému, ako je dátový sklad alebo dátové jazero.
+\end{enumerate}
+
+\section{Nastavenie ELT pipeline}
+
+Na nastavenie ELT pipeline postupujte takto:
+
+\begin{enumerate}
+    \item \textbf{Extrakcia dát:} Rovnako ako pri ETL, extrahujte dáta z viacerých zdrojov.
+    \item \textbf{Načítanie dát:} Načítajte surové dáta do cieľového systému, ako je cloudový dátový sklad.
+    \item \textbf{Transformácia dát:} Využite výpočtovú kapacitu cieľového systému na vykonanie transformácií prostredníctvom SQL alebo iných dotazovacích jazykov.
+\end{enumerate}
+
+\section{Programatické transformácie pomocou dbt}
+
+Dátová komunita čoraz viac využíva nástroje ako \textbf{dbt (data build tool)} na programatické transformácie v rámci pipeline. dbt umožňuje používateľom písať transformácie v SQL a poskytuje funkcie testovania a dokumentácie.
+
+\begin{itemize}
+    \item \textbf{Transformácie založené na SQL:} Používatelia môžu definovať logiku transformácií v SQL skriptoch známych ako dbt modely.
+    \item \textbf{Testovanie a dokumentácia:} dbt umožňuje implementovať kontroly kvality dát a vytvárať dokumentáciu spoločne s transformáciami.
+\end{itemize}
+
+Viac informácií o dbt nájdete v \href{https://docs.getdbt.com/}{dokumentácii dbt}.
+
+\section{Záver}
+
+ETL a ELT pipelines hrajú zásadnú úlohu v moderných dátových pracovných tokoch tým, že zabezpečujú efektívnu integráciu, transformáciu a načítanie dát do cieľových systémov. Voľba medzi ETL a ELT závisí od faktorov, ako sú objem dát, zložitosť transformácií a dostupná infraštruktúra.
+
+\begin{itemize}
+    \item \textbf{ETL:} Ideálne pre scenáre, kde sú potrebné zložité transformácie pred načítaním dát.
+    \item \textbf{ELT:} Vhodné pre moderné cloudové prostredia, ktoré dokážu spracovať veľké dátové súbory a umožňujú transformácie po načítaní.
+\end{itemize}
+
+Použitím správneho prístupu môžu organizácie zabezpečiť efektívne spracovanie dát, čo podporí lepšie rozhodovanie a analýzu.
+
+\end{document}
